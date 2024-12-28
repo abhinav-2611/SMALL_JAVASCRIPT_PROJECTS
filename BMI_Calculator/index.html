@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #bmiResult, #bmiCategory {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+     <div class="container">
+    <h1>BMI Calculator</h1>
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter your weight"><br><br>
+
+    <label for="height">Height (m):</label>
+    <input type="number" id="height" placeholder="Enter your height" step="0.01"><br><br>
+
+    <button onclick="bmiCalculator()">Calculate BMI</button>
+
+    <h2>Your BMI: <span id="bmiResult">-</span>kg/m2</h2>
+    <h3 id="bmiCategory">-</h3>
+</div>
+
+    <script src="/Small_Javascript_Projects/BMI_Calculator/bmiCalculator.js"></script>
+</body>
+</html>

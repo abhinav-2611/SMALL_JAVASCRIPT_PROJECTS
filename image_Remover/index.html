@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            /* background-color: #000; */
+            /* color: #fff; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #000;
+            font-family: cursive;
+        }
+
+        div ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            list-style: none;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ul li img {
+            height: 200px;
+            width: 200px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        ul li img:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            border-color: #007;
+        }
+
+        #message {
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div>
+        <ul id="pics">
+            <li><img id="pic1" src="https://images.pexels.com/photos/163347/war-desert-guns-gunshow-163347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""></li>
+            <li><img id="pic2" src="https://images.pexels.com/photos/78783/submachine-gun-rifle-automatic-weapon-weapon-78783.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""></li>
+            <li><img id="pic3" src="https://images.pexels.com/photos/9845020/pexels-photo-9845020.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt=""></li>
+            <li><img id="pic4" src="https://images.pexels.com/photos/3678428/pexels-photo-3678428.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt=""></li>
+        </ul>
+    </div>
+    <script>
+        const allPics = document.querySelector('#pics');
+        
+        allPics.addEventListener('click', function (e) {
+            // Check if the clicked element is an image
+            if (e.target.tagName === 'IMG') {
+                const remove = e.target.parentNode; // Get the parent <li> of the clicked image
+                remove.remove(); // Remove the <li> element
+
+                // Check if there are no more <li> elements in the #pics container
+                if (allPics.children.length === 0) {
+                    document.body.style.backgroundColor = 'black'; // Change the background color
+                    
+                    const message = document.createElement('h1'); 
+                    message.innerHTML = 'No images left'; 
+                    message.id = 'message';
+                    document.body.appendChild(message); // Append it to the body
+                }
+            }
+        }, false);
+    </script>
+</body>
+</html>

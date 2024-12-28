@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="colorChanger.css" />
+    <title>JavaScript Background Color Switcher</title>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        
+
+        /* Canvas Section */
+        .canvas {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        /* Button Styling */
+        .button {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #grey {
+            background-color: grey;
+        }
+
+        #pink {
+            background-color: pink;
+        }
+
+        #skyblue {
+            background-color: skyblue;
+        }
+
+        #yellow {
+            background-color: yellow;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="canvas">
+        <h1>Color Scheme Switcher</h1>
+        <div class="allButton">
+            <span class="button" id="grey"></span>
+            <span class="button" id="pink"></span>
+            <span class="button" id="skyblue"></span>
+            <span class="button" id="yellow"></span>
+        </div>
+        <button type="reset" class="reset">RESET</button>
+        <h2>
+            Try clicking on one of the colors above to change the background color of this page!
+        </h2>
+    </div>
+
+    <script src="/Small_Javascript_Projects/colorChanger/colorChanger.js"></script>
+</body>
+</html>
