@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Changer</title>
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            transition: background-color 0.5s ease;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #222;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+
+        button:active {
+            transform: scale(0.95);
+            background-color: #004080;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Background Color Changer</h1>
+    <button id="start">START</button>
+    <button id="stop">STOP</button>
+    <footer>
+        Made with ❤️ by <a href="#">Abhinav Srivastava</a>
+    </footer>
+
+    <script>
+        let intervalId = null;
+
+        const changeColor = function () {
+            const hexVal = '123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += hexVal[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+
+        document.querySelector('#start').addEventListener('click', function () {
+            if (!intervalId) {
+                intervalId = setInterval(function () {
+                    document.querySelector('body').style.backgroundColor = changeColor();
+                }, 1000);
+            }
+        });
+
+        document.querySelector('#stop').addEventListener('click', function () {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        });
+        
+        // --------------------------------------
+// Notes on setInterval and clearInterval
+// --------------------------------------
+
+/*
+1. Added a Condition to Ensure `setInterval` is Not Called Multiple Times
+
+The Problem:
+- If you click the START button multiple times without any safeguard, `setInterval` will create multiple intervals.
+- Each interval will independently run the background color-changing function every second. This will lead to:
+  - Faster and chaotic changes in the background color.
+  - Unnecessary memory usage, as multiple timers will be running simultaneously.
+
+The Fix:
+- Add a condition to ensure only one interval is active:
+    if (!intervalId) {
+        intervalId = setInterval(function () {
+            document.querySelector('body').style.backgroundColor = changeColor();
+        }, 1000);
+    }
+
+- The condition `if (!intervalId)` ensures that `setInterval` is only executed if `intervalId` is null or undefined (i.e., no active interval is running).
+- This prevents the creation of multiple intervals when the START button is clicked repeatedly.
+
+Result:
+- Only one interval is active at any time, ensuring smooth operation.
+*/
+
+/*
+2. Reset Interval State After `clearInterval`
+
+The Problem:
+- When you call `clearInterval(intervalId)` to stop the interval, it stops the timer, 
+  but the `intervalId` variable still holds the ID of the cleared interval.
+- If you try to restart the timer (e.g., by clicking the START button again), 
+  the condition `if (!intervalId)` will fail because `intervalId` is still holding a value.
+
+The Fix:
+- After stopping the interval, reset `intervalId` to null:
+    clearInterval(intervalId);
+    intervalId = null;
+
+- By resetting `intervalId` to `null`, the condition `if (!intervalId)` will pass the next time you click the START button.
+- This ensures you can restart the timer without issues.
+
+Why These Fixes Are Necessary:
+1. Prevents multiple intervals from being created, avoiding chaotic behavior and memory wastage.
+2. Allows the timer to be cleanly restarted after stopping, maintaining smooth functionality.
+*/
+
+    </script>
+</body>
+</html>
+  
