@@ -1,30 +1,37 @@
-document.getElementById("button")
-.addEventListener("click", async () => {
-    // Get input values
-    let artistName = document.getElementById("artistName").value.trim();
-    let songName = document.getElementById("songName").value.trim();
+document.getElementById("button").addEventListener("click", async () => {
+      const artistName = document.getElementById("artistName").value.trim();
+      const songName = document.getElementById("songName").value.trim();
+      const resultBox = document.getElementById("getSong");
 
-    if (artistName === "" || songName === "") {
-        document.getElementById("getSong").innerHTML = "⚠️ Please fill in both fields!";
+      resultBox.innerHTML = ""; // Clear previous results
+
+      if (artistName === "" || songName === "") {
+        resultBox.innerHTML = "⚠️ Please fill in both fields!";
         return;
-    }
+      }
 
-    // Fetch lyrics
-    let lyrics = await getSong(artistName, songName);
-    document.getElementById("getSong").innerHTML = lyrics.replace(/\n/g, "<br>") || "Lyrics not found!";
-});
+      resultBox.innerHTML = "🔄 Searching for lyrics... Please wait.";
 
-// Fetch lyrics using async function
-async function getSong(artist, song) {
-try {
-    let url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
-    let res = await axios.get(url);
-    if (res.data.lyrics) {
-        return `<strong>🎧 Lyrics for "${song}" by ${artist}:</strong><br><br>` + res.data.lyrics;
-    } else {
-        return "❌ No lyrics found. Please try a different song.";
+      let lyrics = await getSong(artistName, songName);
+
+      if (!lyrics) {
+        resultBox.innerHTML = "❌ Lyrics not found. Please check the artist or song name.";
+      } else {
+        resultBox.innerHTML = lyrics.replace(/\n/g, "<br>");
+      }
+    });
+
+    async function getSong(artist, song) {
+      try {
+        const url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+        const res = await axios.get(url);
+        if (res.data.lyrics) {
+          return `<strong>🎧 Lyrics for "${song}" by ${artist}:</strong><br><br>${res.data.lyrics}`;
+        } else {
+          return "";
+        }
+      } catch (error) {
+        console.error("Error fetching lyrics:", error);
+        return "";
+      }
     }
-} catch (error) {
-    return "❌ Unable to fetch data. Please try again.";
-}
-}
